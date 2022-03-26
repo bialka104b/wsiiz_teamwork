@@ -21,15 +21,26 @@ exports.find = (req,res) => {
 
         let searchPhrase = req.body.searchInput
 
-        connection.query('SELECT produkty.Id, produkty.Nazwa as NazwaProduktu, produkty.Opis, produkty.Kalorie, produkty.kJ, produkty.Bialko, produkty.Tluszcz, produkty.Weglowodany, produkty.Blonnik, produkty.IG, produkty.Img, kategorie.Nazwa as NazwaKategorii FROM produkty JOIN kategorie ON produkty.Id_kategorii = kategorie.Id WHERE produkty.Nazwa LIKE ?', ["%" + searchPhrase + "%"], (err,rows) => {
+        connection.query(`
+            SELECT produkty.Id, 
+            produkty.Nazwa as NazwaProduktu,
+            produkty.Opis,
+            produkty.Kalorie,
+            produkty.kJ,
+            produkty.Bialko,
+            produkty.Tluszcz,
+            produkty.Weglowodany,
+            produkty.Blonnik,
+            produkty.IG,
+            produkty.Img,
+            kategorie.Nazwa as NazwaKategorii FROM produkty JOIN kategorie ON produkty.Id_kategorii = kategorie.Id WHERE produkty.Nazwa LIKE ?`,
+            ["%" + searchPhrase + "%"],
+            (err, rows) => {
             // Jeśli udane połączenie
             connection.release()
-            if(!err)
-            {
+            if(!err) {
                 res.render('products', {rows})
-            }
-            else
-            {
+            } else {
                 console.log(err)
             }
             console.log("Znalezione dane z bazy: \n", rows);
