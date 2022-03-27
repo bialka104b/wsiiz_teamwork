@@ -8,6 +8,8 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
 })
 
+let products = [];
+
 // Strona glowna
 exports.home = (req,res) => {
     res.render('home')
@@ -38,7 +40,9 @@ exports.find = (req,res) => {
             (err, rows) => {
             // Jeśli udane połączenie
             connection.release()
-            if(!err) {
+            if (!err) {
+                    products = rows;
+                    console.log("productshhh", products, "productshhh");
                 res.render('products', {rows})
             } else {
                 console.log(err)

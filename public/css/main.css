@@ -4,7 +4,7 @@ body {
 }
 
 .bodyContainer .header {
-  background-image: url("../../assets/images/background.jpg");
+  background-image: url("../images/path2.png");
   background-size: cover;
   height: 100vh;
   width: 100%;
