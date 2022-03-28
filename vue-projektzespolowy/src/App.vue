@@ -4,7 +4,35 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-<div>
+  <div>
+    <div class="bodyContainer">
+        <header class="header">
+            <div class="row bg-white headerRow">
+                <div class="col-6 logoContainer fw-bold">LOGO</div>
+                <nav class="col-6 d-flex justify-content-between">
+                    <div class="navLink">
+                        <a href="" class="d-block fw-bold">Zakładka1</a>
+                    </div>
+                    <div class="navLink">
+                        <a href="" class="d-block fw-bold">Zakładka2</a>
+                    </div>
+                    <div class="navLink">
+                        <a href="" class="d-block fw-bold">Zakładka3</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="container titlePage">
+                <h3>Wylicz kalorie i zadbaj o swoje zdrowie</h3>
+                <h1>BEST CALCULATOR</h1>
+                <p>Węglowodany, kalorie, białka, IG</p>
+                <button class="btn btn-primary calc mt-4">Przelicz</button>
+            </div>
+        </header>
+        <main>
+            <section></section>
+        </main>
+        <footer></footer>
+    </div>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
@@ -52,9 +80,9 @@ export default{
 </script>
 
 <style>
-@import './assets/base.css';
+/* @import './assets/base.css'; */
 
-#app {
+/* #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -111,5 +139,5 @@ a,
   .logo {
     margin: 0 2rem 0 0;
   }
-}
+} */
 </style>
