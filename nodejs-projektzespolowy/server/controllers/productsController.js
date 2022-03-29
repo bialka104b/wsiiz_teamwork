@@ -8,7 +8,7 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
 })
 
-// Strona glowna
+// Strona glowna test
 exports.home = async (req,res) => {
     try{
         res.json({ message: 'Strona domowa'})
@@ -26,6 +26,19 @@ exports.products = async (req,res) => {
             if(err) throw err
             console.log("Połączono do bazy z routa")
 
+            let page = (req.query.page != undefined && req.query.page > 0) ? parseInt(req.query.page) : 1
+            const limit = (req.query.limit != undefined && req.query.limit > 0) ? parseInt(req.query.limit) : 12
+            const offset = (page - 1) * limit
+            let numOfProducts
+
+            connection.query(`SELECT COUNT(*) as count FROM produkty`, (err, countQuery)=>{
+                if(!err){
+                    numOfProducts = countQuery[0].count
+                }else{
+                    console.log(err)
+                }
+            })
+
             // Query do bazy
             connection.query(`SELECT produkty.id, 
                 produkty.nazwa as nazwa, 
@@ -41,14 +54,22 @@ exports.products = async (req,res) => {
                 kategorie.nazwa as kategoria 
                 FROM produkty 
                 JOIN kategorie 
-                ON produkty.id_kategorii = kategorie.id`, 
+                ON produkty.id_kategorii = kategorie.id
+                LIMIT ?
+                OFFSET ?`,
+                [limit, offset], 
                 (err, rows) => {
                     // Jeśli udane połączenie
                     connection.release()
                     if(!err)
-                    {
+                    {                   
+                        let numOfPages = Math.ceil(numOfProducts / limit)
                         res.status(200).json({
                             count: rows.length,
+                            limit: limit,
+                            totalProducts: numOfProducts,
+                            currentPage: page,
+                            totalPages: numOfPages,
                             products: rows
                         })
                     } 
@@ -72,7 +93,24 @@ exports.find = async (req,res) => {
             if(err) throw err
             console.log("Połączono do bazy z routa find")
     
+            let page = (req.query.page != undefined && req.query.page > 0) ? parseInt(req.query.page) : 1
+            const limit = (req.query.limit != undefined && req.query.limit > 0) ? parseInt(req.query.limit) : 12
+            const offset = (page - 1) * limit
+            let numOfProducts
             let searchPhrase = req.body.searchInput
+
+            connection.query(`SELECT COUNT(*) as count 
+            FROM produkty
+            JOIN kategorie 
+            ON produkty.id_kategorii = kategorie.id 
+            WHERE produkty.nazwa LIKE ?`, ["%" + searchPhrase + "%"], (err, countQuery)=>{
+                if(!err){
+                    numOfProducts = countQuery[0].count
+                }else{
+                    console.log(err)
+                }
+            })
+
             if(searchPhrase.length >= 2){
                 connection.query(`SELECT produkty.id, 
                     produkty.nazwa as nazwa, 
@@ -89,19 +127,23 @@ exports.find = async (req,res) => {
                     FROM produkty 
                     JOIN kategorie 
                     ON produkty.id_kategorii = kategorie.id 
-                    WHERE produkty.nazwa LIKE ?`, ["%" + searchPhrase + "%"], 
+                    WHERE produkty.nazwa LIKE ?
+                    LIMIT ?
+                    OFFSET ?`, ["%" + searchPhrase + "%", limit, offset], 
                     (err,rows) => {
                         // Jeśli udane połączenie
                         connection.release()
-                        if(!err)
-                        {
+                        if(!err){
+                            let numOfPages = Math.ceil(numOfProducts / limit)
                             res.status(200).json({
                                 count: rows.length,
+                                limit: limit,
+                                totalProducts: numOfProducts,
+                                currentPage: page,
+                                totalPages: numOfPages,
                                 products: rows
                             })
-                        }
-                        else
-                        {
+                        }else{
                             console.log(err)
                         }
                     //console.log("Znalezione dane z bazy: \n", rows);
@@ -142,12 +184,9 @@ exports.singleProduct = async (req,res) => {
                 WHERE produkty.id=?`, [req.params.id], 
                 (err,rows) => {
                     connection.release()
-                    if(!err && rows.length > 0)
-                    {
+                    if(!err && rows.length > 0){
                         res.status(200).json({products: rows})
-                    }
-                    else
-                    {
+                    }else{
                         res.json({message: 'Nie znaleziono tego produktu'})
                     }
                 //console.log('Znalezione dane z bazy dla pojedycznego produktu: \n', rows)
@@ -196,7 +235,24 @@ exports.category = async (req, res) => {
             if(err) throw err
             console.log("Połączono do bazy z routa kategorii")
             
+
+            let page = (req.query.page != undefined && req.query.page > 0) ? parseInt(req.query.page) : 1
+            const limit = (req.query.limit != undefined && req.query.limit > 0) ? parseInt(req.query.limit) : 12
+            const offset = (page - 1) * limit
+            let numOfProducts
             let categoryName = req.params.category
+
+            connection.query(`SELECT COUNT(*) as count 
+            FROM produkty
+            JOIN kategorie 
+            ON produkty.id_kategorii = kategorie.id 
+            WHERE kategorie.nazwa LIKE ?`, ['%' + categoryName + '%'], (err, countQuery)=>{
+                if(!err){
+                    numOfProducts = countQuery[0].count
+                }else{
+                    console.log(err)
+                }
+            })
 
             // Query
             connection.query(`SELECT produkty.id, 
@@ -214,19 +270,23 @@ exports.category = async (req, res) => {
                 FROM produkty 
                 JOIN kategorie 
                 ON produkty.id_kategorii = kategorie.id 
-                WHERE kategorie.nazwa LIKE ?`, ["%" + categoryName + "%"], 
+                WHERE kategorie.nazwa LIKE ?
+                LIMIT ?
+                OFFSET ?`, ["%" + categoryName + "%", limit, offset], 
                 (err,rows) => {
                     // Jeśli udane połączenie
                     connection.release()
-                    if(!err)
-                    {
+                    if(!err){
+                        let numOfPages = Math.ceil(numOfProducts / limit)
                         res.status(200).json({
                             count: rows.length,
+                            limit: limit,
+                            totalProducts: numOfProducts,
+                            currentPage: page,
+                            totalPages: numOfPages,
                             products: rows
                         })
-                    }
-                    else
-                    {
+                    }else{
                         console.log(err)
                     }
                 //console.log("Znalezione dane z bazy: \n", rows);
