@@ -95,8 +95,8 @@ import TheWelcome from './components/TheWelcome.vue'
             </section>
       </main>
     </div>
-    <div class="footerContainer">
-        <footer>Footer</footer>
+    <div class="footerContainer backgroundPrimary">
+        <footer class="container py-5">Footer</footer>
     </div>
 
   <main>
