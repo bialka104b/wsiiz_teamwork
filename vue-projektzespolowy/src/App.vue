@@ -1,85 +1,131 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Footer from './components/Footer.vue';
+import TheWelcome from './components/TheWelcome.vue';
+import Header from './components/Header.vue';
+import Calculator from './components/Calculator.vue';
 </script>
 
 <template>
   <div>
-    <div class="bodyContainer">
-        <header class="header">
-            <div class="row bg-white headerRow">
-                <div class="col-6 logoContainer fw-bold">LOGO</div>
-                <nav class="col-6 d-flex justify-content-between">
-                    <div class="navLink">
-                        <a href="" class="d-block fw-bold">Zakładka1</a>
-                    </div>
-                    <div class="navLink">
-                        <a href="" class="d-block fw-bold">Zakładka2</a>
-                    </div>
-                    <div class="navLink">
-                        <a href="" class="d-block fw-bold">Zakładka3</a>
-                    </div>
-                </nav>
-            </div>
-            <div class="container titlePage">
-                <h3>Wylicz kalorie i zadbaj o swoje zdrowie</h3>
-                <h1>BEST CALCULATOR</h1>
-                <p>Węglowodany, kalorie, białka, IG</p>
-                <button class="btn btn-primary calc mt-4">Przelicz</button>
-            </div>
-        </header>
-        <main>
-            <section></section>
-        </main>
-        <footer></footer>
-    </div>
-  <header>
+    <Header />
+  <!-- <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
     </div>
-  </header>
-
+  </header> -->
+    <div class="mainContainer container my-5">
+      <main id="main">
+          <Calculator/>
+            <section class="productsSection">
+                <div class="row">
+                  <h1 class="text-center">Wszystkie produkty</h1>
+                  <h5 class="text-center">Tu znajdziesz szczegółowe opisy wszystkich produktów</h5>
+                  <div class="col-3" v-for="product in products" :key="product">
+                    
+                    <p>Id: {{product.id}}</p>
+                    <p class="backgroundPrimary text-white p-2 text-center mb-0">{{product.nazwa}}
+                    </p>
+                    <hr class="mt-1 backgroundPrimary hr">
+                    <div class="imageProduct">
+                      <img src="https://cdn.shopify.com/s/files/1/0406/0322/2179/products/gro_5_bdbc6680-6aca-47d0-a1ec-1a212514aa5a_600x800_crop_center.jpg?v=1591727776" alt="" class="img-fluid rounded mx-auto d-block">
+                    </div>
+                    
+                    <p class="textJustify">Opis: {{product.opis}}</p>
+                    <p>Kalorie: {{product.kalorie}}</p>
+                    <p>Białko: {{product.bialko}}</p>
+                    <p>Błonnik: {{product.blonnik}}</p>
+                    <p>Tłuszcz: {{product.tluszcz}}</p>
+                    <p>Węglowodany: {{product.weglowodany}}</p>
+                    <p>Ig: {{product.ig}}</p>
+                    <p>KJ: {{product.kj}}</p>
+                    
+                  </div>
+                  
+                </div>
+            </section>
+      </main>
+    </div>
+    <Footer />
   <main>
-    <TheWelcome />
+    <!-- <TheWelcome /> -->
+    
   </main>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+// import Multiselect from 'vue-multiselect'
+// import Multiselect from '@vueform/multiselect'
+
 export default{
   name: 'app',
+  components: {
+    // Multiselect
+  },
+
   data(){
     return {
-      result: []
+      result: [],
+      count: 0,
+      products: []
     }
   },
   created(){
     this.getProducts();
   }, 
+  
   methods: {
       async getProducts() {
         await axios.get(`http://localhost:4000/api/products`)
-                .then(res => {
-                  console.log(res, "res");
-                  if (res.status == 200) {
-                    this.result = res.data;
-                     console.log(res.data);
-                  } else {
-                    console.log(this.result);
-                  }
-                })
-                .catch(err => {
-                  console.log(err);
-                })
+            .then(res => {
+              console.log(res, "res");
+              if (res.status == 200) {
+                this.result = res.data;
+                this.count = res.data.count;
+                this.products = res.data.products;
+                  console.log(res.data, "res data");
+              } else {
+                console.log(this.result, "result");
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
       },
-}
+  }
 }
 </script>
-
+<style src="@vueform/multiselect/themes/default.css"></style>
 <style>
+.logoContainer {
+  padding: 10px;
+  height: 100px;
+}
+.logoImage {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100%);
+}
+
+#main {
+
+}
+.textJustify {
+  text-align: justify;
+}
+
+.character-label-icon {
+  margin: 0 6px 0 0;
+  height: 26px;
+}
+.character-option-icon {
+  margin: 0 6px 0 0;
+  height: 22px;
+}
+
 /* @import './assets/base.css'; */
 
 /* #app {

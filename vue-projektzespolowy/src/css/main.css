@@ -1,11 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap");
-body {
-  font-family: Oswald,sans-serif;
-}
-
-.bodyContainer .header {
+.headerContainer .header {
   background-image: url("../assets/images/background.jpg");
   background-size: cover;
+  background-attachment: 5;
   height: 100vh;
   width: 100%;
   display: -webkit-box;
@@ -27,7 +24,7 @@ body {
           justify-content: start;
 }
 
-.bodyContainer .header .headerRow {
+.headerContainer .header .headerRow {
   height: 100px;
   margin: 0;
   padding: 0 10%;
@@ -38,11 +35,11 @@ body {
           align-items: center;
 }
 
-.bodyContainer .header .headerRow .navLink {
+.headerContainer .header .headerRow .navLink {
   padding: 20px 0;
 }
 
-.bodyContainer .header .headerRow .navLink a {
+.headerContainer .header .headerRow .navLink a {
   font-weight: 300;
   border-radius: 20px;
   padding: 5px 10px;
@@ -54,16 +51,16 @@ body {
   transition: all 0.5s ease-out;
 }
 
-.bodyContainer .header .headerRow .navLink a:hover {
+.headerContainer .header .headerRow .navLink a:hover {
   color: white;
   background-color: #8ebd0e;
 }
 
-.bodyContainer .header .headerRow nav {
+.headerContainer .header .headerRow nav {
   height: 60px;
 }
 
-.bodyContainer .header .titlePage {
+.headerContainer .header .titlePage {
   height: 600px;
   width: 100%;
   display: -webkit-box;
@@ -89,22 +86,23 @@ body {
       -ms-flex-align: start;
           align-items: start;
   margin-bottom: 32px;
+  margin-top: 6%;
 }
 
-.bodyContainer .header .titlePage h1 {
+.headerContainer .header .titlePage h1 {
   font-weight: 500;
   font-size: 80px;
 }
 
-.bodyContainer .header .titlePage h3 {
+.headerContainer .header .titlePage h3 {
   font-weight: 300;
 }
 
-.bodyContainer .header .titlePage p {
+.headerContainer .header .titlePage p {
   font-weight: 700;
 }
 
-.bodyContainer .header .titlePage button.calc {
+.headerContainer .header .titlePage button.calc {
   background: #8ebd0e;
   border: 2px solid #8ebd0e88;
   border-radius: 20px;
@@ -115,8 +113,21 @@ body {
   transition: all 0.5s ease-out;
 }
 
-.bodyContainer .header .titlePage button.calc:hover {
+.headerContainer .header .titlePage button.calc:hover {
   background-color: rgba(255, 255, 255, 0);
   color: #8ebd0e;
+}
+
+body {
+  font-family: Oswald,sans-serif;
+}
+
+.backgroundPrimary {
+  background-color: #8ebd0e;
+}
+
+.hr {
+  height: 3px !important;
+  opacity: 1;
 }
 /*# sourceMappingURL=main.css.map */
