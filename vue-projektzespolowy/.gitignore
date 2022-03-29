@@ -28,4 +28,8 @@ coverage
 *.sw?
 package-lock.json
 /.vscode/extensions
+<<<<<<< HEAD
+/src/css/main.css.map
+=======
 main.css.map
+>>>>>>> c83072598c3fae42adb6be7e97e2c14e4975968b
