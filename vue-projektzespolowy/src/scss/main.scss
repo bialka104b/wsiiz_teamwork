@@ -2,13 +2,15 @@
 
 $primary: #8ebd0e;
 
+
 body {
     font-family: Oswald,sans-serif;
 }
+
 .bodyContainer {
     .header {
         background-image: url(
-            "../../assets/images/background.jpg"
+            "../assets/images/background.jpg"
         );
         background-size: cover;
         height: 100vh;
@@ -56,6 +58,7 @@ body {
             justify-content: center;
             align-items: start;
             margin-bottom: 32px;
+            margin-top: 6%;
             
             h1 {
                 font-weight: 500;
@@ -81,4 +84,13 @@ body {
 
         }
     }
+}
+
+.backgroundPrimary
+{
+    background-color: $primary;
+}
+.hr {
+    height: 3px !important;
+    opacity: 1;
 }

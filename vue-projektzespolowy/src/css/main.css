@@ -89,6 +89,7 @@ body {
       -ms-flex-align: start;
           align-items: start;
   margin-bottom: 32px;
+  margin-top: 6%;
 }
 
 .bodyContainer .header .titlePage h1 {
@@ -118,5 +119,14 @@ body {
 .bodyContainer .header .titlePage button.calc:hover {
   background-color: rgba(255, 255, 255, 0);
   color: #8ebd0e;
+}
+
+.backgroundPrimary {
+  background-color: #8ebd0e;
+}
+
+.hr {
+  height: 3px !important;
+  opacity: 1;
 }
 /*# sourceMappingURL=main.css.map */

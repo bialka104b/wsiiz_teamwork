@@ -8,7 +8,9 @@ import TheWelcome from './components/TheWelcome.vue'
     <div class="bodyContainer">
         <header class="header">
             <div class="row bg-white headerRow">
-                <div class="col-6 logoContainer fw-bold">LOGO</div>
+                <div class="col-6 logoContainer fw-bold">
+                  <img src="./assets/images/logo.png" alt="" class="logoImage">
+                </div>
                 <nav class="col-6 d-flex justify-content-between">
                     <div class="navLink">
                         <a href="" class="d-block fw-bold">Zakładka1</a>
@@ -23,26 +25,82 @@ import TheWelcome from './components/TheWelcome.vue'
             </div>
             <div class="container titlePage">
                 <h3>Wylicz kalorie i zadbaj o swoje zdrowie</h3>
-                <h1>BEST CALCULATOR</h1>
+                <h1>FIT CALCULATOR</h1>
                 <p>Węglowodany, kalorie, białka, IG</p>
                 <button class="btn btn-primary calc mt-4">Przelicz</button>
             </div>
         </header>
-        <main>
-            <section></section>
-        </main>
-        <footer></footer>
     </div>
-  <header>
+  <!-- <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
     </div>
-  </header>
+  </header> -->
+    <div class="mainContainer container my-5">
+      <main id="main">
+            <section class="calculatorSection my-5">
+              <div class="container">
+                <h1 class="text-center">Twój kalkulator</h1>
+                <input type="button" value="ggg">
+                <div class="row">
+                  <div class="col-6">
+                    <select class="form-select" aria-label="Default select example">
+                      <option selected>Wybierz produkt</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                    <button type="button" class="btn backgroundPrimary text-white">Oblicz</button>
+                    <div>Wynik to:</div>
+                  </div>
+                  <div class="col-6">
+                    <select class="form-select" aria-label="Default select example">
+                      <option selected>Wybierz gramature</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="productsSection">
+                <div class="row">
+                  <h1 class="text-center">Wszystkie produkty</h1>
+                  <h5 class="text-center">Tu znajdziesz szczegółowe opisy wszystkich produktów</h5>
+                  <div class="col-3" v-for="product in products" :key="product">
+                    
+                    <p>Id: {{product.id}}</p>
+                    <p class="backgroundPrimary text-white p-2 text-center mb-0">{{product.nazwa}}
+                    </p>
+                    <hr class="mt-1 backgroundPrimary hr">
+                    <div class="imageProduct">
+                      <img src="https://cdn.shopify.com/s/files/1/0406/0322/2179/products/gro_5_bdbc6680-6aca-47d0-a1ec-1a212514aa5a_600x800_crop_center.jpg?v=1591727776" alt="" class="img-fluid rounded mx-auto d-block">
+                    </div>
+                    
+                    <p class="textJustify">Opis: {{product.opis}}</p>
+                    <p>Kalorie: {{product.kalorie}}</p>
+                    <p>Białko: {{product.bialko}}</p>
+                    <p>Błonnik: {{product.blonnik}}</p>
+                    <p>Tłuszcz: {{product.tluszcz}}</p>
+                    <p>Węglowodany: {{product.weglowodany}}</p>
+                    <p>Ig: {{product.ig}}</p>
+                    <p>KJ: {{product.kj}}</p>
+                    
+                  </div>
+                  
+                </div>
+            </section>
+      </main>
+    </div>
+    <div class="footerContainer">
+        <footer>Footer</footer>
+    </div>
 
   <main>
-    <TheWelcome />
+    <!-- <TheWelcome /> -->
   </main>
   </div>
 </template>
@@ -53,7 +111,9 @@ export default{
   name: 'app',
   data(){
     return {
-      result: []
+      result: [],
+      count: 0,
+      products: []
     }
   },
   created(){
@@ -66,9 +126,11 @@ export default{
                   console.log(res, "res");
                   if (res.status == 200) {
                     this.result = res.data;
-                     console.log(res.data);
+                    this.count = res.data.count;
+                    this.products = res.data.products;
+                     console.log(res.data, "res data");
                   } else {
-                    console.log(this.result);
+                    console.log(this.result, "result");
                   }
                 })
                 .catch(err => {
@@ -80,6 +142,22 @@ export default{
 </script>
 
 <style>
+.logoContainer {
+  padding: 10px;
+  height: 100px;
+}
+.logoImage {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100%);
+}
+
+#main {
+
+}
+.textJustify {
+  text-align: justify;
+}
 /* @import './assets/base.css'; */
 
 /* #app {
