@@ -117,7 +117,7 @@ export default {
         },
 
         async getProducts() {
-            await axios.get(`http://localhost:4000/api/products`)
+            await axios.get(`http://localhost:4000/api/allProducts`)
                 .then(res => {
                     if (res.status == 200) {
                         this.products = res.data.products;

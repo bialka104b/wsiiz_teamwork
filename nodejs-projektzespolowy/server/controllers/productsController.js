@@ -18,7 +18,7 @@ exports.home = async (req,res) => {
     }
 }
 
-// Lista produktów
+// Lista produktów pod katalog
 exports.products = async (req,res) => {
     try{
         // Połączenie
@@ -70,6 +70,52 @@ exports.products = async (req,res) => {
                             totalProducts: numOfProducts,
                             currentPage: page,
                             totalPages: numOfPages,
+                            products: rows
+                        })
+                    } 
+                    else 
+                    {
+                        res.json({ message: 'Nie znaleziono produktów'})
+                    }
+                //console.log('Znalezione dane z bazy: \n', rows)
+            })
+        })
+    }catch(e){
+        console.log(e)
+        res.status(404).json({message: 'Error'})
+    }
+}
+
+// Lista wszystkich produktow pod kalkulator
+exports.allProducts = async (req,res) => {
+    try{
+        // Połączenie
+        pool.getConnection((err,connection) => {
+            if(err) throw err
+            console.log("Połączono do bazy z routa")
+
+            // Query do bazy
+            connection.query(`SELECT produkty.id, 
+                produkty.nazwa as nazwa,  
+                produkty.kalorie, 
+                produkty.kj, 
+                produkty.bialko, 
+                produkty.tluszcz, 
+                produkty.weglowodany, 
+                produkty.blonnik, 
+                produkty.ig, 
+                produkty.img, 
+                kategorie.nazwa as kategoria 
+                FROM produkty 
+                JOIN kategorie 
+                ON produkty.id_kategorii = kategorie.id`, 
+                (err, rows) => {
+                    // Jeśli udane połączenie
+                    connection.release()
+                    if(!err)
+                    {                   
+                        res.status(200).json({
+                            count: rows.length,
                             products: rows
                         })
                     } 
