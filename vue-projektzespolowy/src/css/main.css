@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap");
+.headerContainer .header {
+  background-image: url("../assets/images/background.jpg");
+  background-size: cover;
+  background-attachment: 5;
+  height: 100vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: start;
+     -moz-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+}
+
+.headerContainer .header .headerRow {
+  height: 100px;
+  margin: 0;
+  padding: 0 10%;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.headerContainer .header .headerRow .navLink {
+  padding: 20px 0;
+}
+
+.headerContainer .header .headerRow .navLink a {
+  font-weight: 300;
+  border-radius: 20px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #8ebd0e;
+  -webkit-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+
+.headerContainer .header .headerRow .navLink a:hover {
+  color: white;
+  background-color: #8ebd0e;
+}
+
+.headerContainer .header .headerRow nav {
+  height: 60px;
+}
+
+.headerContainer .header .titlePage {
+  height: 600px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+  -webkit-align-items: start;
+     -moz-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  margin-bottom: 32px;
+  margin-top: 6%;
+}
+
+.headerContainer .header .titlePage h1 {
+  font-weight: 500;
+  font-size: 80px;
+}
+
+.headerContainer .header .titlePage h3 {
+  font-weight: 300;
+}
+
+.headerContainer .header .titlePage p {
+  font-weight: 700;
+}
+
+.headerContainer .header .titlePage button.calc {
+  background: #8ebd0e;
+  border: 2px solid #8ebd0e88;
+  border-radius: 20px;
+  width: 100px;
+  -webkit-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+
+.headerContainer .header .titlePage button.calc:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: #8ebd0e;
+}
+
+body {
+  font-family: Oswald,sans-serif;
+}
+
+.backgroundPrimary {
+  background-color: #8ebd0e;
+}
+
+.hr {
+  height: 3px !important;
+  opacity: 1;
+}
+/*# sourceMappingURL=main.css.map */
