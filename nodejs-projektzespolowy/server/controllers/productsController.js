@@ -8,16 +8,6 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
 })
 
-// Strona glowna test
-exports.home = async (req,res) => {
-    try{
-        res.json({ message: 'Strona domowa'})
-    }catch(e){
-        console.log(e)
-        res.status(404).json({ message: 'Error'})
-    }
-}
-
 // Lista produktów pod katalog
 exports.products = async (req,res) => {
     try{
@@ -55,6 +45,7 @@ exports.products = async (req,res) => {
                 FROM produkty 
                 JOIN kategorie 
                 ON produkty.id_kategorii = kategorie.id
+                ORDER BY nazwa ASC
                 LIMIT ?
                 OFFSET ?`,
                 [limit, offset], 
@@ -108,7 +99,8 @@ exports.allProducts = async (req,res) => {
                 kategorie.nazwa as kategoria 
                 FROM produkty 
                 JOIN kategorie 
-                ON produkty.id_kategorii = kategorie.id`, 
+                ON produkty.id_kategorii = kategorie.id
+                ORDER BY nazwa ASC`, 
                 (err, rows) => {
                     // Jeśli udane połączenie
                     connection.release()
@@ -174,6 +166,7 @@ exports.find = async (req,res) => {
                     JOIN kategorie 
                     ON produkty.id_kategorii = kategorie.id 
                     WHERE produkty.nazwa LIKE ?
+                    ORDER BY nazwa ASC
                     LIMIT ?
                     OFFSET ?`, ["%" + searchPhrase + "%", limit, offset], 
                     (err,rows) => {
@@ -197,6 +190,54 @@ exports.find = async (req,res) => {
             }else{
                 res.json({message: 'Nazwa szukanego produktu jest za krótka'})
             }
+        })
+    }catch(e){
+        console.log(e)
+        res.status(404).json({message: 'Error'})
+    }
+}
+
+// Lista 4 najnowszych produktów
+exports.newProducts = async (req,res) => {
+    try{
+        // Połączenie
+        pool.getConnection((err,connection) => {
+            if(err) throw err
+            console.log("Połączono do bazy z routa")
+
+            // Query do bazy
+            connection.query(`SELECT produkty.id, 
+                produkty.nazwa as nazwa,  
+                produkty.kalorie, 
+                produkty.kj, 
+                produkty.bialko, 
+                produkty.tluszcz, 
+                produkty.weglowodany, 
+                produkty.blonnik, 
+                produkty.ig, 
+                produkty.img, 
+                kategorie.nazwa as kategoria 
+                FROM produkty 
+                JOIN kategorie 
+                ON produkty.id_kategorii = kategorie.id
+                ORDER BY id DESC
+                LIMIT 4`, 
+                (err, rows) => {
+                    // Jeśli udane połączenie
+                    connection.release()
+                    if(!err)
+                    {                   
+                        res.status(200).json({
+                            count: rows.length,
+                            products: rows
+                        })
+                    } 
+                    else 
+                    {
+                        res.json({ message: 'Nie znaleziono produktów'})
+                    }
+                //console.log('Znalezione dane z bazy: \n', rows)
+            })
         })
     }catch(e){
         console.log(e)
@@ -317,6 +358,7 @@ exports.category = async (req, res) => {
                 JOIN kategorie 
                 ON produkty.id_kategorii = kategorie.id 
                 WHERE kategorie.nazwa LIKE ?
+                ORDER BY nazwa ASC
                 LIMIT ?
                 OFFSET ?`, ["%" + categoryName + "%", limit, offset], 
                 (err,rows) => {
