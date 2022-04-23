@@ -1,6 +1,7 @@
 @import "./variables";
 @import "./mixins";
 @import "./components/header";
+@import "./components/multiselect";
 @import "./components/calculator";
 @import "./components/products";
 @import "./components/footer";
@@ -12,10 +13,7 @@ body {
     font-family: Oswald,sans-serif;
 }
 
-.backgroundPrimary
-{
-    background-color: $primary;
-}
+
 
 .hr {
     height: 3px !important;

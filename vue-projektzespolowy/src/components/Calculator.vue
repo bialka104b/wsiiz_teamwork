@@ -7,22 +7,22 @@
                 <input type="button" value="ggg">
                 <div class="row">
                   <div class="col-6">
-                    <select class="form-select" aria-label="Default select example">
+                    <!-- <select class="form-select" aria-label="Default select example">
                       <option selected>Wybierz produkt</option>
                       <option value="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
-                    </select>
-                    <button type="button" class="btn backgroundPrimary text-white">Oblicz</button>
+                    </select> -->
+                    <button type="button" class="btn bg-primary text-white">Oblicz</button>
                     <div>Wynik to:</div>
                   </div>
                   <div class="col-6">
-                    <select class="form-select" aria-label="Default select example">
+                    <!-- <select class="form-select" aria-label="Default select example">
                       <option selected>Wybierz gramature</option>
                       <option value="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
-                    </select>
+                    </select> -->
                     <!-- <Multiselect
                       v-model="value"
                       :options="options"
@@ -31,7 +31,7 @@
                       v-model="valueSelectedProducts"
                       placeholder="Wybierz produkt"
                       label="nazwa"
-                      :options="optionsSelectedProducts"
+                      :options="filteredList"
                       
                     >
                     <!-- :options="[
@@ -39,11 +39,11 @@
                         { value: 'spiderman', name: 'Spiderman', icon: 'https://cdn2.iconfinder.com/data/icons/avengers-filled/48/12_-_Spiderman_-_infinity_war_-_end_game_-_marvel_-_avengers_-_super_hero-512.png' },
                         { value: 'ironman', name: 'Iron Man', icon: 'https://cdn2.iconfinder.com/data/icons/avengers-filled/48/02_-_IRONMAN_-_infinity_war_-_end_game_-_marvel_-_avengers_-_super_hero-512.png' },
                       ]" -->
-                      <template v-slot:singlelabel="{ valueSelectedProducts }">
+                      <!-- <template v-slot:singlelabel="{ valueSelectedProducts }">
                         <div class="multiselect-single-label">
                           <img class="character-label-icon" :src="valueSelectedProducts"> {{ valueSelectedProducts.nazwa }}
                         </div>
-                      </template>
+                      </template> -->
 
                       <!-- <template v-slot:option="{ optionsSelectedProducts }">
                         <img class="character-option-icon" :src="optionsSelectedProducts"> {{ valueSelectedProducts.nazwa }}
@@ -66,12 +66,11 @@
 import axios from 'axios';
 import Multiselect from '@vueform/multiselect';
 export default {
-    // props: {
-    //     product: {
-    //         type: Array,
-    //         required: true
-    //     }
-    // },
+    props: {
+        filteredList: {
+            type: Array
+        }
+    },
     components: {
         Multiselect
     },
@@ -104,9 +103,7 @@ export default {
             },
         }
     },
-    computed: {
-        
-    },
+    
     created(){
         // this.wylicz();
         this.getProducts();
@@ -115,15 +112,22 @@ export default {
         wylicz(){
             this.count = this.count + this.text;
         },
-
+        
         async getProducts() {
-            await axios.get(`http://localhost:4000/api/products`)
+            const config = {
+              method: 'get',
+              url: `http://localhost:4000/api/products`,
+              headers: { 
+                'Content-Type': 'application/json',
+              }
+            };
+            await axios(config)
                 .then(res => {
                     if (res.status == 200) {
                         this.products = res.data.products;
-                        this.optionsSelectedProducts = res.data.products;
-                        console.log(res.data.products, "ddjskslad");
-                        console.log(this.products, "this.products");
+                        // this.optionsSelectedProducts = res.data.products;
+                        // console.log(res.data.products, "ddjskslad");
+                        // console.log(this.products, "this.products");
                     } else {
                         console.log(this.result, "result");
                     }
@@ -141,5 +145,15 @@ export default {
             return object;
         }
     },
+    computed:{
+    filteredList(){
+      return this.products.filter(post => {
+        // return post.name.toLowerCase().includes(this.search.toLowerCase())
+        // console.log(post, "post");
+        return post
+      })
+    },
+  },
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

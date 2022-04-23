@@ -1,7 +1,7 @@
 .headerContainer {
     .header {
         background-image: url(
-            "../assets/images/background.jpg"
+            "/src/assets/images/background.jpg"
         );
         background-size: cover;
         background-attachment: ceil($number: 5);
@@ -24,12 +24,13 @@
                     border-radius: 20px;
                     padding: 5px 10px;
                     text-decoration: none;
-                    color: $primary;
                     transition: all 0.5s ease-out;
+                    color: white;
 
                     &:hover{
-                        color: white;
-                        background-color: $primary;
+                        background-color: transparent;
+                        color: $primary;
+                        border: 1px solid $primary;
                     }
                 }
             }
@@ -65,7 +66,6 @@
             }
 
             button.calc {
-                background: $primary;
                 border: 2px solid #8ebd0e88;
                 border-radius: 20px;
                 width: 100px;

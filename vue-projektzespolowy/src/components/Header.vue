@@ -7,13 +7,13 @@
                 </div>
                 <nav class="col-6 d-flex justify-content-between">
                     <div class="navLink">
-                        <a href="" class="d-block fw-bold">Zakładka1</a>
+                        <a href="" class="d-block fw-bold btn-primary">Zakładka1</a>
                     </div>
                     <div class="navLink">
-                        <a href="" class="d-block fw-bold">Zakładka2</a>
+                        <a href="" class="d-block fw-bold btn-primary">Zakładka2</a>
                     </div>
                     <div class="navLink">
-                        <a href="" class="d-block fw-bold">Zakładka3</a>
+                        <a href="" class="d-block fw-bold btn-primary">Zakładka3</a>
                     </div>
                 </nav>
             </div>
