@@ -8,8 +8,11 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 export default defineConfig({
   plugins: [vue(), vueJsx()],
   resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+    alias: [{
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+          // this is required for the SCSS modules
+          find: /^~(.*)$/,
+          replacement: '$1',
+    }]
   }
 })
