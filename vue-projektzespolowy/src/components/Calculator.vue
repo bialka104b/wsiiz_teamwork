@@ -13,7 +13,7 @@
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select> -->
-                    <button type="button" class="btn backgroundPrimary text-white">Oblicz</button>
+                    <button type="button" class="btn bg-primary text-white">Oblicz</button>
                     <div>Wynik to:</div>
                   </div>
                   <div class="col-6">

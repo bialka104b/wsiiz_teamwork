@@ -22,7 +22,7 @@ import Calculator from './components/Calculator.vue';
                 <h1 class="text-center">Twój kalkulator</h1>
                 
                 <!-- <Calculator :filteredList="filteredList"/> -->
-                <Multiselect
+                <!-- <Multiselect
                     v-model="valueOne"
                     placeholder="Wybierz produkt"
                     :options="result"
@@ -30,61 +30,92 @@ import Calculator from './components/Calculator.vue';
                     :close-on-select="true" 
                     :clear-on-select="true"
                     :label="nazwa"
-                    :track-by="nazwa" 
-                />
-                <!-- <template> -->
-                    <label>
-                        Waga produktu
-                        <input type="number" name="weightProduct" step="1" v-model="weight" placeholder="Wpisz ilośc gram">
-                    </label>
-                    <button type="button" @click="add()">Dodaj</button>
-                    <button type="button" @click="clearList()">Wyczyść listę</button>
-                <!-- </template> -->
-                <div class="table-responsive-md">
-
-                    <table class="table table-hover table-md table-dark">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nazwa</th>
-                                <th scope="col">Ilość</th>
-                                <th scope="col">Kalorie</th>
-                                <th scope="col">Tłuszcz</th>
-                                <th scope="col">Błonnik</th>
-                                <th scope="col">Bialko</th>
-                                <th scope="col">Węglowodany</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item) in displayList" :key="item">
-                                <td scope="row" class="bg-primary text-white">{{item.nazwa}}</td>
-                                <td scope="row" class="bg-primary text-white">{{item.ilosc}}</td>
-                                <td class="bg-primary text-white">{{item.kalorie.toFixed(2)}}</td>
-                                <td class="bg-primary text-white">{{item.tluszcz}}</td>
-                                <td class="bg-primary text-white">{{item.blonnik}}</td>
-                                <td class="bg-primary text-white">{{item.bialko}}</td>
-                                <td class="bg-primary text-white">{{item.weglowodany}}</td>
-                                <td class="bg-primary text-white"><button class="btn btn-success" @click="removeProduct(item.id, item.ilosc)"><i class="uil uil-trash-alt"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td scope="row">suma</td>
-                                <td></td>
-                                <td>{{sumCalories}}</td>
-                                <td>{{sumFat}}</td>
-                                <td>{{sumFiber}}</td>
-                                <td>{{sumProtein}}</td>
-                                <td>{{sumCarbs}}</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    :track-by="nazwa"
+                    :show-labels="false"
+                >
+                </Multiselect> -->
+                <div class="row">
+                    <div class="div-multiselect col-12 col-sm-6 col-md-4">
+                        <Multiselect 
+                        v-model="valueOne" 
+                        placeholder="Wybierz produkt" 
+                        :label="nazwa" 
+                        :track-by="nazwa"  
+                        :options="result" 
+                        :show-labels="false" 
+                        :custom-label="customLabel1">
+                            <template v-slot:option="{ option }">
+                                <div class="imageOption">
+                                    <img class="character-option-icon" :src='`src/assets/products/${option.img}`' width="50" height="50"> {{ option.nazwa }}
+                                </div>
+                            </template>
+                        </Multiselect>
+                    </div>
+                    <div class="div-multiselect col-12 col-sm-6 col-md-4">
+                        <label class="d-block">
+                            <span>Waga produktu</span>
+                            <input type="number" name="weightProduct" step="1" v-model="weight" placeholder="Wpisz ilośc gram" class="d-block w-100 weightProduct">
+                        </label>
+                    </div>
+                    <div class="div-multiselect col-12 col-sm-6 col-md-4">
+                        <button type="button" @click="add()" class="btn btn-primary p-1 w-100">Dodaj</button>
+                    </div>
                 </div>
-                <PieChart v-if="this.displayList != [] || this.displayList != null"
-                    :width="100"
-                    :height="100"
-                    :chartData="chartData"
-                    :chartOptions="chartOptions"
-                />
+
+                <div class="row">
+                    <div class="col-9">
+                        <div class="table-responsive-md mt-2">
+                            <table class="table table-hover table-md table-dark rounded">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="borderRadiusLT">Nazwa</th>
+                                        <th scope="col">Ilość</th>
+                                        <th scope="col">Kalorie</th>
+                                        <th scope="col">Tłuszcz</th>
+                                        <th scope="col">Błonnik</th>
+                                        <th scope="col">Bialko</th>
+                                        <th scope="col">Węglowodany</th>
+                                        <th scope="col" class="borderRadiusRT"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(item) in displayList" :key="item">
+                                        <td scope="row" class="bg-primary text-white">{{item.nazwa}}</td>
+                                        <td scope="row" class="bg-primary text-white">{{item.ilosc}}g</td>
+                                        <td class="bg-primary text-white">{{item.kalorie.toFixed(2)}}</td>
+                                        <td class="bg-primary text-white">{{item.tluszcz}}g</td>
+                                        <td class="bg-primary text-white">{{item.blonnik}}g</td>
+                                        <td class="bg-primary text-white">{{item.bialko}}g</td>
+                                        <td class="bg-primary text-white">{{item.weglowodany}}g</td>
+                                        <td class="bg-primary text-white alignCenter"><button class="btn btn-success btn-sm" @click="removeProduct(item.id, item.ilosc)"><i class="uil uil-trash-alt"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" class="borderRadiusLB">suma</td>
+                                        <td></td>
+                                        <td>{{sumCalories}}</td>
+                                        <td>{{sumFat}}g</td>
+                                        <td>{{sumFiber}}g</td>
+                                        <td>{{sumProtein}}g</td>
+                                        <td>{{sumCarbs}}g</td>
+                                        <td class="borderRadiusRB"><button type="button" @click="clearList()" class="btn btn-primary p-1 w-100 btn-sm">Wyczyść listę</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <PieChart v-if="this.displayList != [] || this.displayList != null"
+                            :width="200"
+                            :height="300"
+                            :chartData="chartData"
+                            :chartOptions="chartOptions"
+                        />
+                    </div>
+                </div>
+                
+                <!-- </template> -->
+                
+                
                 
                 <section class="productsSection">
                         <div class="row">
@@ -93,9 +124,9 @@ import Calculator from './components/Calculator.vue';
                             <div class="col-3" v-for="product in result" :key="product">
                                 
                                 <p>Id: {{product.id}}</p>
-                                <p class="backgroundPrimary text-white p-2 text-center mb-0">{{product.nazwa}}
+                                <p class="bg-primary text-white p-2 text-center mb-0">{{product.nazwa}}
                                 </p>
-                                <hr class="mt-1 backgroundPrimary hr">
+                                <hr class="mt-1 bg-primary hr">
                                 <div class="imageProduct">
                                     <img v-if="product.img != null" :src="`src/assets/products/${product.img}`" alt="" class="img-fluid rounded mx-auto d-block">
                                     <img v-else src="https://cdn.shopify.com/s/files/1/0406/0322/2179/products/gro_5_bdbc6680-6aca-47d0-a1ec-1a212514aa5a_600x800_crop_center.jpg?v=1591727776" alt="" class="img-fluid rounded mx-auto d-block">
@@ -166,7 +197,7 @@ export default{
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'right'
+                        position: 'bottom'
                     },
                 },
             },
@@ -219,6 +250,9 @@ export default{
 	},
 	
 	methods: {
+        customLabel1 ({ nazwa, img }) {
+            return `${nazwa}`;
+        },
         convertWeightToGrams(waga){
             return waga/100;
         },
@@ -239,7 +273,7 @@ export default{
                 ]
             }
         },
-        customLabel ({ id, nazwa }) {
+        customLabel ({ id, nazwa, img }) {
             return `${nazwa}`;
         },
         summationOfCalories(){
@@ -337,7 +371,8 @@ export default{
 }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
-<style>
+<style lang="scss">
+@import './scss/main.scss';
 .logoContainer {
 	padding: 10px;
 	height: 100px;
