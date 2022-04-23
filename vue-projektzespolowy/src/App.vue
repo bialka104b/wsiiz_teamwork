@@ -4,10 +4,17 @@ import TheWelcome from './components/TheWelcome.vue';
 import Header from './components/Header.vue';
 import Calculator from './components/Calculator.vue';
 </script>
-
 <template>
 	<div>
         <Header />
+            <nav>
+            <router-link to="/">Home</router-link> |
+            <router-link to="/welcome">welcome</router-link> |
+            <router-link to="/about">About</router-link>
+            </nav>
+            <main>
+                <router-view />
+            </main>
         <!-- <header>
             <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
@@ -53,7 +60,7 @@ import Calculator from './components/Calculator.vue';
                     </div>
                     <div class="div-multiselect col-12 col-sm-6 col-md-4">
                         <label class="d-block">
-                            <span>Waga produktu</span>
+                            <span>Waga produktu w g lub ml</span>
                             <input type="number" name="weightProduct" step="1" v-model="weight" placeholder="Wpisz ilośc gram" class="d-block w-100 weightProduct">
                         </label>
                     </div>
@@ -63,8 +70,8 @@ import Calculator from './components/Calculator.vue';
                 </div>
 
                 <div class="row">
-                    <div class="col-9">
-                        <div class="table-responsive-md mt-2">
+                    <div class="col-12 col-xl-9">
+                        <div class="table-responsive mt-2">
                             <table class="table table-hover table-md table-dark rounded">
                                 <thead>
                                     <tr>
@@ -103,7 +110,7 @@ import Calculator from './components/Calculator.vue';
                             </table>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-xl-3">
                         <PieChart v-if="this.displayList != [] || this.displayList != null"
                             :width="200"
                             :height="300"
@@ -112,9 +119,6 @@ import Calculator from './components/Calculator.vue';
                         />
                     </div>
                 </div>
-                
-                <!-- </template> -->
-                
                 
                 
                 <section class="productsSection">
