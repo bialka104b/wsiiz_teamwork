@@ -3,11 +3,11 @@
     <i>
       <slot name="icon"></slot>
     </i>
+    dfjsklfds
     <div class="details">
       <h3>
-        <slot name="heading"></slot>
+        dddddddd
       </h3>
-      <slot></slot>
     </div>
   </div>
 </template>

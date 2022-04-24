@@ -7,13 +7,13 @@
                 </div>
                 <nav class="col-6 d-flex justify-content-between">
                     <div class="navLink">
-                        <a href="" class="d-block fw-bold btn-primary">Zakładka1</a>
+                        <router-link to="/" class="d-block fw-bold btn-primary">Home</router-link>
                     </div>
                     <div class="navLink">
-                        <a href="" class="d-block fw-bold btn-primary">Zakładka2</a>
+                        <router-link to="/allProducts" class="d-block fw-bold btn-primary">All Products</router-link>
                     </div>
                     <div class="navLink">
-                        <a href="" class="d-block fw-bold btn-primary">Zakładka3</a>
+                        <router-link to="/about" class="d-block fw-bold btn-primary">About</router-link>
                     </div>
                 </nav>
             </div>
@@ -26,3 +26,13 @@
         </header>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        showBgImage: {
+            type: Boolean
+        }
+    },
+}
+</script>

@@ -1,149 +1,234 @@
 
 <template>
-    <div>
-        <section class="calculatorSection my-5">
-              <div class="container">
-                <h1 class="text-center">Twój kalkulator</h1>
-                <input type="button" value="ggg">
-                <div class="row">
-                  <div class="col-6">
-                    <!-- <select class="form-select" aria-label="Default select example">
-                      <option selected>Wybierz produkt</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select> -->
-                    <button type="button" class="btn bg-primary text-white">Oblicz</button>
-                    <div>Wynik to:</div>
-                  </div>
-                  <div class="col-6">
-                    <!-- <select class="form-select" aria-label="Default select example">
-                      <option selected>Wybierz gramature</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select> -->
-                    <!-- <Multiselect
-                      v-model="value"
-                      :options="options"
-                    /> -->
-                    <Multiselect
-                      v-model="valueSelectedProducts"
-                      placeholder="Wybierz produkt"
-                      label="nazwa"
-                      :options="filteredList"
-                      
-                    >
-                    <!-- :options="[
-                        { value: 'captainamerica', name: 'Captain America', icon: 'https://cdn2.iconfinder.com/data/icons/avengers-filled/48/03_-_Captain_America_-_infinity_war_-_end_game_-_marvel_-_avengers_-_super_hero-512.png' },
-                        { value: 'spiderman', name: 'Spiderman', icon: 'https://cdn2.iconfinder.com/data/icons/avengers-filled/48/12_-_Spiderman_-_infinity_war_-_end_game_-_marvel_-_avengers_-_super_hero-512.png' },
-                        { value: 'ironman', name: 'Iron Man', icon: 'https://cdn2.iconfinder.com/data/icons/avengers-filled/48/02_-_IRONMAN_-_infinity_war_-_end_game_-_marvel_-_avengers_-_super_hero-512.png' },
-                      ]" -->
-                      <!-- <template v-slot:singlelabel="{ valueSelectedProducts }">
-                        <div class="multiselect-single-label">
-                          <img class="character-label-icon" :src="valueSelectedProducts"> {{ valueSelectedProducts.nazwa }}
-                        </div>
-                      </template> -->
-
-                      <!-- <template v-slot:option="{ optionsSelectedProducts }">
-                        <img class="character-option-icon" :src="optionsSelectedProducts"> {{ valueSelectedProducts.nazwa }}
-                      </template> -->
-                    </Multiselect>
-                  </div>
-                </div>
+    <section class="calculatorSection my-5">
+        <h1 class="text-center">Twój kalkulator</h1>
+          <div class="row">
+              <div class="div-multiselect col-12 col-sm-6 col-md-4">
+                  <Multiselect 
+                  v-model="valueOne" 
+                  placeholder="Wybierz produkt" 
+                  :label="nazwa" 
+                  :track-by="nazwa"  
+                  :options="result" 
+                  :show-labels="false" 
+                  :custom-label="customLabel1">
+                      <template v-slot:option="{ option }">
+                          <div class="imageOption">
+                              <img class="character-option-icon" :src='`src/assets/products/${option.img}`' width="50" height="50"> {{ option.nazwa }}
+                          </div>
+                      </template>
+                  </Multiselect>
               </div>
-              <!-- <p v-for="item in product" :key="item">
-                {{item.nazwa}}
-              </p> -->
-            </section>
-            {{optionsSelectedProducts}}
-            <input v-model="text" type="number" step="0.01">
-            <button @click="wylicz">Dodaj {{count}}</button>
-    </div>
+              <div class="div-multiselect col-12 col-sm-6 col-md-4">
+                  <label class="d-block">
+                      <span>Waga produktu w g lub ml</span>
+                      <input type="number" name="weightProduct" step="1" v-model="weight" placeholder="Wpisz ilośc gram" class="d-block w-100 weightProduct">
+                  </label>
+              </div>
+              <div class="div-multiselect col-12 col-sm-6 col-md-4">
+                  <button type="button" @click="add()" class="btn btn-primary p-1 w-100">Dodaj</button>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-12 col-xl-9">
+                  <div class="table-responsive mt-2">
+                      <table class="table table-hover table-md table-dark rounded">
+                          <thead>
+                              <tr>
+                                  <th scope="col" class="borderRadiusLT">Nazwa</th>
+                                  <th scope="col">Ilość</th>
+                                  <th scope="col">Kalorie</th>
+                                  <th scope="col">Tłuszcz</th>
+                                  <th scope="col">Błonnik</th>
+                                  <th scope="col">Bialko</th>
+                                  <th scope="col">Węglowodany</th>
+                                  <th scope="col" class="borderRadiusRT"></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr v-for="(item) in displayList" :key="item">
+                                  <td scope="row" class="bg-primary text-white">{{item.nazwa}}</td>
+                                  <td scope="row" class="bg-primary text-white">{{item.ilosc}}g</td>
+                                  <td class="bg-primary text-white">{{item.kalorie.toFixed(2)}}</td>
+                                  <td class="bg-primary text-white">{{item.tluszcz}}g</td>
+                                  <td class="bg-primary text-white">{{item.blonnik}}g</td>
+                                  <td class="bg-primary text-white">{{item.bialko}}g</td>
+                                  <td class="bg-primary text-white">{{item.weglowodany}}g</td>
+                                  <td class="bg-primary text-white alignCenter"><button class="btn btn-success btn-sm" @click="removeProduct(item.id, item.ilosc)"><i class="uil uil-trash-alt"></i></button></td>
+                              </tr>
+                              <tr>
+                                  <td scope="row" class="borderRadiusLB">suma</td>
+                                  <td></td>
+                                  <td>{{sumCalories}}</td>
+                                  <td>{{sumFat}}g</td>
+                                  <td>{{sumFiber}}g</td>
+                                  <td>{{sumProtein}}g</td>
+                                  <td>{{sumCarbs}}g</td>
+                                  <td class="borderRadiusRB"><button type="button" @click="clearList()" class="btn btn-primary p-1 w-100 btn-sm">Wyczyść listę</button></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <div class="col-12 col-xl-3">
+                  <PieChart v-if="this.displayList != [] || this.displayList != null"
+                      :width="200"
+                      :height="300"
+                      :chartData="chartData"
+                      :chartOptions="chartOptions"
+                  />
+              </div>
+          </div>
+    </section>
 </template>
 
 <script>
-import axios from 'axios';
-import Multiselect from '@vueform/multiselect';
+import Multiselect from 'vue-multiselect';
+import PieChart from "../PieChart.js";
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+import lodash from 'lodash';
+
 export default {
     props: {
-        filteredList: {
+        result: {
             type: Array
         }
     },
     components: {
-        Multiselect
+        Multiselect,
+		PieChart,
     },
     data(){
         return {
-            products: [], // tablica lecąca z API
-            //SELECT FOR PRODUCTS
-            valueSelectedProducts: null,
-            optionsSelectedProducts: [],
-            placeholderSelectedProducts: '',
-            labelSelectedProducts: "nazwa",
-
-            text: 0,
-            count: 0,
-            value: null,
-            options: [
-                'Batman',
-                'Robin',
-                'Joker',
-            ],
-            example7: {
-                value: null,
-                placeholder: 'Select your character',
-                label: 'name',
-                options: [
-                    { value: 'captainamerica', name: 'Captain America', icon: 'https://cdn2.iconfinder.com/data/icons/avengers-filled/48/03_-_Captain_America_-_infinity_war_-_end_game_-_marvel_-_avengers_-_super_hero-512.png' },
-                    { value: 'spiderman', name: 'Spiderman', icon: 'https://cdn2.iconfinder.com/data/icons/avengers-filled/48/12_-_Spiderman_-_infinity_war_-_end_game_-_marvel_-_avengers_-_super_hero-512.png' },
-                    { value: 'ironman', name: 'Iron Man', icon: 'https://cdn2.iconfinder.com/data/icons/avengers-filled/48/02_-_IRONMAN_-_infinity_war_-_end_game_-_marvel_-_avengers_-_super_hero-512.png' },
-                ]
+			//MULTISELECT
+            valueOne: null,//value do single select
+			nazwa: '',
+			//CALCULATOR
+			weight: 0,
+			//LIST
+			displayList: [],
+			sumCalories: 0,
+            sumFat: 0,
+            sumFiber: 0,
+            sumProtein: 0,
+            sumCarbs: 0,
+			//CHART JS
+			chartData: {},
+            chartOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                },
             },
         }
     },
     
     created(){
-        // this.wylicz();
-        this.getProducts();
+        this.getLocalStorage();
+        this.returnChartData();
     },
     methods: {
-        wylicz(){
-            this.count = this.count + this.text;
+		//MULTISELECT
+		customLabel1 ({ nazwa, img }) {
+            return `${nazwa}`;
+        },
+		//LIST
+        summationOfCalories(){
+            this.sumCalories = lodash.sumBy(this.displayList, 'kalorie').toFixed(2);
+        },
+        summationOfFat(){
+            this.sumFat = lodash.sumBy(this.displayList, 'tluszcz').toFixed(3);
+        },
+        summationOfFiber(){
+            this.sumFiber= lodash.sumBy(this.displayList, 'blonnik').toFixed(3);
+        },
+        summationOfProtein(){
+            this.sumProtein = lodash.sumBy(this.displayList, 'bialko').toFixed(3);
+        },
+        summationOfCarbs(){
+            this.sumCarbs = lodash.sumBy(this.displayList, 'weglowodany').toFixed(2);
+        },
+		convertWeightToGrams(waga){
+            return waga/100;
+        },
+		add(){
+            let emptyArr = [];
+            let weight = this.convertWeightToGrams(this.weight);
+            if (this.displayList) {
+                emptyArr =  this.displayList;
+            }
+            //zrób obsługe kiedy nazwa jest nulem
+            const object = {
+                id: Math.floor(Math.random()*10000+1),
+                nazwa: this.valueOne.nazwa,
+                kalorie: weight * this.valueOne.kalorie,
+                tluszcz: weight * this.valueOne.tluszcz,
+                blonnik: weight * this.valueOne.blonnik,
+                bialko: weight * this.valueOne.bialko,
+                weglowodany: weight * this.valueOne.weglowodany,
+                ilosc: this.weight,
+            };
+            emptyArr.push(object);
+            this.setLocalStorage(emptyArr)
+            this.updateList();
+        },
+		removeProduct(itemId, itemIlosc){
+            this.getLocalStorage();
+            this.setLocalStorage(this.displayList.filter(item => {
+                    if (item.id !== itemId) {
+                        return item;
+                    }
+            }));
+            this.getLocalStorage();
+            if ([...this.displayList].length == 0) {
+                this.clearList()
+            }
+        },
+		updateList(){
+            this.getLocalStorage();
+        },
+		clearList(){
+            localStorage.removeItem("lista");
+            this.getLocalStorage();
+        },
+		//LOCAL STORAGE
+		getLocalStorage(){
+            this.displayList= JSON.parse(localStorage.getItem("lista"));
+            this.summationOfCalories()
+            this.summationOfFat()
+            this.summationOfFiber()
+            this.summationOfProtein()
+            this.summationOfCarbs()
+            this.returnChartData();
+            return this.displayList;
+        },
+        setLocalStorage(item){
+            localStorage.setItem('lista', JSON.stringify(item));
         },
         
-        async getProducts() {
-            const config = {
-              method: 'get',
-              url: `http://localhost:4000/api/products`,
-              headers: { 
-                'Content-Type': 'application/json',
-              }
-            };
-            await axios(config)
-                .then(res => {
-                    if (res.status == 200) {
-                        this.products = res.data.products;
-                        // this.optionsSelectedProducts = res.data.products;
-                        // console.log(res.data.products, "ddjskslad");
-                        // console.log(this.products, "this.products");
-                    } else {
-                        console.log(this.result, "result");
+        //CHART JS
+		returnChartData(){
+            this.chartData = {
+                labels: [ 'Tłuszcz', 'Błonnik', 'Białko', 'Węglowodany'],
+                datasets: [
+                    {
+                    backgroundColor: [ '#000', '#8ebd0e', '#DD1B16', 'yellow'],
+                    data: [
+                        this.sumFat,
+                        this.sumFiber,
+                        this.sumProtein,
+                        this.sumCarbs
+                    ],
+                    hoverOffset: 2
                     }
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+                ]
+            }
         },
-
-        przygotujSelected(id, name){
-            const object = {
-                id: id,
-                name: name
-            };
-            return object;
-        }
     },
     computed:{
     filteredList(){
