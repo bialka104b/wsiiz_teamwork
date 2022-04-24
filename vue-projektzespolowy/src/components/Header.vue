@@ -21,7 +21,7 @@
                 <h3>Wylicz kalorie i zadbaj o swoje zdrowie</h3>
                 <h1>FIT CALCULATOR</h1>
                 <p>Węglowodany, kalorie, białka, IG</p>
-                <button class="btn btn-primary calc mt-4">Przelicz</button>
+                <router-link to="/about" class="btn btn-primary calc mt-4">Calculator</router-link>
             </div>
         </header>
     </div>
