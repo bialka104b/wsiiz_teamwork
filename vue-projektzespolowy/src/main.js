@@ -12,18 +12,18 @@ const router = vueRouter.createRouter({
 	routes: [
 		{
 			path: "/",
-			name: "ggg",
-			component: () => import("./components/WelcomeItem.vue"),
+			name: "Home",
+			component: () => import("./components/Calculator.vue"),
 		},
 		{
-			path: "/welcome",
-			name: "WelcomeItem",
-			component: WelcomeItem,
+			path: "/allProducts",
+			name: "allProducts",
+			component: () => import("./components/AllProducts.vue"),
 		},
 		{
 			path: "/about",
 			name: "About",
-			component: () => import("./views/About.vue"),
+			component: () => import("./components/Calculator.vue"),
 		},
 	],
 });
