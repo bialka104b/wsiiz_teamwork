@@ -19,3 +19,38 @@ body {
     height: 3px !important;
     opacity: 1;
 }
+//TOOLTIPS
+.myTooltip {
+    position: relative;
+    display: block;
+    opacity: 1!important;
+}
+
+.myTooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: yellow;
+    color: #212529;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 0px;
+    right: 45px;
+    z-index: 1;
+}
+
+.myTooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltip-left::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent yellow;
+}

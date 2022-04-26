@@ -46,7 +46,12 @@
 									<th scope="col">Błonnik</th>
 									<th scope="col">Bialko</th>
 									<th scope="col">Węglowodany</th>
-									<th scope="col" class="borderRadiusRT"></th>
+									<th scope="col" class="borderRadiusRT alignCenter">
+                                        <button class="btn btn-success btn-sm myTooltip" @click="show()">
+                                            <i class="uil uil-plus"></i>
+                                            <span class="tooltiptext tooltip-left">Dodaj inny</span>
+                                        </button>
+                                    </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -58,7 +63,42 @@
 									<td class="bg-primary text-white">{{item.blonnik}}g</td>
 									<td class="bg-primary text-white">{{item.bialko}}g</td>
 									<td class="bg-primary text-white">{{item.weglowodany}}g</td>
-									<td class="bg-primary text-white alignCenter"><button class="btn btn-success btn-sm" @click="removeProduct(item.id, item.ilosc)"><i class="uil uil-trash-alt"></i></button></td>
+									<td class="bg-primary text-white alignCenter">
+                                        <button class="btn btn-success btn-sm myTooltip" @click="removeProduct(item.id, item.ilosc)">
+                                            <i class="uil uil-minus"></i>
+                                            <span class="tooltiptext tooltip-left">Usuń z listy</span>
+                                        </button>
+                                        
+                                    </td>
+								</tr>
+								<tr v-show="showAddMyProduct">
+									<td scope="row" class="">
+                                        <input type="text" name="nazwa" class="d-block w-100 weightProduct"  placeholder="nazwa" v-model="nazwa">
+                                    </td>
+									<td>
+                                        <input type="number" step="1" min="1" name="ilosc" class="d-block w-100 weightProduct" placeholder="ilosc w gramach" v-model="ilosc">
+                                    </td>
+									<td>
+                                        <input type="number" step="0.001" name="kalorie" class="d-block w-100 weightProduct" placeholder="kalorie" v-model="kalorie">
+                                    </td>
+									<td>
+                                        <input type="number" step="0.001" name="tluszcz" class="d-block w-100 weightProduct" placeholder="tluszcz" v-model="tluszcz">
+                                    </td>
+									<td>
+                                        <input type="number" step="0.001" name="blonnik" class="d-block w-100 weightProduct" placeholder="blonnik" v-model="blonnik">
+                                    </td>
+									<td>
+                                        <input type="number" step="0.001" name="bialko" class="d-block w-100 weightProduct" placeholder="bialko" v-model="bialko">
+                                    </td>
+									<td>
+                                        <input type="number" step="0.001" name="weglowodany" class="d-block w-100 weightProduct" placeholder="weglowodany" v-model="weglowodany">
+                                    </td>
+									<td class="alignCenter">
+                                        <button class="btn btn-success btn-sm myTooltip" @click="addMyProduct()">
+                                            <i class="uil uil-plus"></i>
+                                            <span class="tooltiptext tooltip-left">Dodaj do listy</span>
+                                        </button>
+                                    </td>
 								</tr>
 								<tr>
 									<td scope="row" class="borderRadiusLB">suma</td>
@@ -68,10 +108,16 @@
 									<td>{{sumFiber}}g</td>
 									<td>{{sumProtein}}g</td>
 									<td>{{sumCarbs}}g</td>
-									<td class="borderRadiusRB"><button type="button" @click="clearList()" class="btn btn-primary p-1 w-100 btn-sm">Wyczyść listę</button></td>
+									<td class="borderRadiusRB alignCenter">
+                                        <button type="button" @click="clearList()" class="btn btn-success btn-sm myTooltip">
+                                            <i class="uil uil-trash-alt"></i>
+                                            <span class="tooltiptext tooltip-left">Wyczyść listę</span>
+                                        </button>
+                                    </td>
 								</tr>
 							</tbody>
 						</table>
+                        
 					</div>
 				</div>
 				<div class="col-12 col-xl-3 py-2">
@@ -96,7 +142,7 @@
 					</div>
 					
 				</div>
-				<div class="col-6 col-md-5" v-if="valueOne.nazwa != undefined">
+				<div class="col-6 col-md-3" v-if="valueOne.nazwa != undefined">
 					<p class="mb-0">Kalorie: {{valueOne.kalorie}}</p>
 					<p class="mb-0">Białko: {{valueOne.bialko}}</p>
 					<p class="mb-0">Błonnik: {{valueOne.blonnik}}</p>
@@ -105,7 +151,7 @@
 					<p class="mb-0">Ig: {{valueOne.ig}}</p>
 					<p class="mb-0">Węglowodany: {{valueOne.weglowodany}}</p>
 				</div>
-				<div class="col-12 col-md-4" v-if="valueOne.nazwa != undefined">
+				<div class="col-12 col-md-6" v-if="valueOne.nazwa != undefined">
 					<p class="textJustify">Opis: {{valueOne.opis}}</p>
 				</div>
 			</div>
@@ -132,6 +178,7 @@ export default {
     },
     data(){
         return {
+            showAddMyProduct: false,
 			//MULTISELECT
             valueOne: null,//value do single select
 			nazwa: '',
@@ -144,6 +191,13 @@ export default {
             sumFiber: 0,
             sumProtein: 0,
             sumCarbs: 0,
+            blonnik: 0.000,
+            bialko: 0.000,
+            ilosc: 0,
+            kalorie: 0.000,
+            tluszcz:0.000,
+            weglowodany:0.000,
+            nazwa:'',
 			//CHART JS
 			chartData: {},
             chartOptions: {
@@ -163,6 +217,9 @@ export default {
         this.returnChartData();
     },
     methods: {
+        show(){
+            this.showAddMyProduct = !this.showAddMyProduct
+        },
 		//MULTISELECT
 		customLabel1 ({ nazwa, img }) {
             return `${nazwa}`;
@@ -185,6 +242,27 @@ export default {
         },
 		convertWeightToGrams(waga){
             return waga/100;
+        },
+        addMyProduct(){
+            const object = {
+                id: Math.floor(Math.random()*10000+1),
+                nazwa: this.nazwa,
+                kalorie: this.kalorie,
+                tluszcz: this.tluszcz,
+                blonnik: this.blonnik,
+                bialko: this.bialko,
+                weglowodany: this.weglowodany,
+                ilosc: Math.round(this.ilosc),
+            }
+            this.getLocalStorage();
+            let emptyArr = [];
+            if (this.displayList) {
+                emptyArr =  this.displayList;
+            }
+            emptyArr.push(object);
+            this.setLocalStorage(emptyArr)
+            this.updateList();
+            this.show();
         },
 		add(){
             let emptyArr = [];
