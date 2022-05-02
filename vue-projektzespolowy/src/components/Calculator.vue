@@ -3,13 +3,14 @@
 </script>
 <template>
     <section class="calculatorSection my-5">
-        <h1 class="text-center">Twój kalkulator</h1>
+        <h1 class="text-center">{{$t("header.yourCalculator")}}</h1>
 			<div class="row m-0">
 				<div class="div-multiselect col-12 col-sm-6 col-md-4">
 					
 					<Multiselect 
 					v-model="valueOne" 
-					placeholder="Wybierz produkt" 
+					:placeholder="$t('header.selectProduct')"
+                    i18n-placeholder
 					:label="nazwa" 
 					:track-by="nazwa"  
 					:options="result" 
@@ -17,19 +18,22 @@
 					:custom-label="customLabel1">
 						<template v-slot:option="{ option }">
 							<div class="imageOption">
-								<img class="character-option-icon" :src='`src/assets/products/${option.img}`' width="50" height="50"> {{ option.nazwa }}
+								<img class="character-option-icon" :src='`src/assets/products/${option.img}`' width="50" height="50"> {{ $t(option.nazwa) }}
 							</div>
 						</template>
 					</Multiselect>
 				</div>
 				<div class="div-multiselect col-12 col-sm-6 col-md-4">
 					<label class="d-block">
-						<span>Waga produktu w g lub ml</span>
-						<input type="number" name="weightProduct" step="1" v-model="weight" placeholder="Wpisz ilośc gram" class="d-block w-100 weightProduct">
+						<span>{{$t("header.weightProduct")}}</span>
+						<input type="number" name="weightProduct" step="1" v-model="weight"
+                        :placeholder="$t('header.enterGrams')"
+                        i18n-placeholder
+                        class="d-block w-100 weightProduct">
 					</label>
 				</div>
 				<div class="div-multiselect col-12 col-sm-6 col-md-4">
-					<button type="button" @click="add()" class="btn btn-primary p-1 w-100">Dodaj</button>
+					<button type="button" @click="add()" class="btn btn-primary p-1 w-100">{{$t('header.add')}}</button>
 				</div>
 			</div>
 
@@ -39,34 +43,34 @@
 						<table class="table table-hover table-md table-dark rounded">
 							<thead>
 								<tr>
-									<th scope="col" class="borderRadiusLT">Nazwa</th>
-									<th scope="col">Ilość</th>
-									<th scope="col">Kalorie</th>
-									<th scope="col">Tłuszcz</th>
-									<th scope="col">Błonnik</th>
-									<th scope="col">Bialko</th>
-									<th scope="col">Węglowodany</th>
+									<th scope="col" class="borderRadiusLT">{{$t('header.name')}}</th>
+									<th scope="col">{{$t('header.quantity')}}</th>
+									<th scope="col">{{$t('header.calories')}}</th>
+									<th scope="col">{{$t('header.fat')}}</th>
+									<th scope="col">{{$t('header.fiber')}}</th>
+									<th scope="col">{{$t('header.protein')}}</th>
+									<th scope="col">{{$t('header.carbohydrates')}}</th>
 									<th scope="col" class="borderRadiusRT alignCenter">
                                         <button class="btn btn-success btn-sm myTooltip" @click="show()">
                                             <i class="uil uil-plus"></i>
-                                            <span class="tooltiptext tooltip-left">Dodaj inny</span>
+                                            <span class="tooltiptext tooltip-left">{{$t('header.addOther')}}</span>
                                         </button>
                                     </th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="(item) in displayList" :key="item">
-									<td scope="row" class="bg-primary text-white">{{item.nazwa}}</td>
+									<td scope="row" class="bg-primary text-white">{{$t(item.nazwa)}}</td>
 									<td scope="row" class="bg-primary text-white">{{item.ilosc}}g</td>
 									<td class="bg-primary text-white">{{item.kalorie.toFixed(2)}}</td>
-									<td class="bg-primary text-white">{{item.tluszcz}}g</td>
-									<td class="bg-primary text-white">{{item.blonnik}}g</td>
-									<td class="bg-primary text-white">{{item.bialko}}g</td>
-									<td class="bg-primary text-white">{{item.weglowodany}}g</td>
+									<td class="bg-primary text-white">{{item.tluszcz.toFixed(3)}}g</td>
+									<td class="bg-primary text-white">{{item.blonnik.toFixed(3)}}g</td>
+									<td class="bg-primary text-white">{{item.bialko.toFixed(3)}}g</td>
+									<td class="bg-primary text-white">{{item.weglowodany.toFixed(3)}}g</td>
 									<td class="bg-primary text-white alignCenter">
                                         <button class="btn btn-success btn-sm myTooltip" @click="removeProduct(item.id, item.ilosc)">
                                             <i class="uil uil-minus"></i>
-                                            <span class="tooltiptext tooltip-left">Usuń z listy</span>
+                                            <span class="tooltiptext tooltip-left">{{$t('header.removeItem')}}</span>
                                         </button>
                                         
                                     </td>
@@ -96,7 +100,7 @@
 									<td class="alignCenter">
                                         <button class="btn btn-success btn-sm myTooltip" @click="addMyProduct()">
                                             <i class="uil uil-plus"></i>
-                                            <span class="tooltiptext tooltip-left">Dodaj do listy</span>
+                                            <span class="tooltiptext tooltip-left">{{$t('header.addToList')}}</span>
                                         </button>
                                     </td>
 								</tr>
@@ -111,7 +115,7 @@
 									<td class="borderRadiusRB alignCenter">
                                         <button type="button" @click="clearList()" class="btn btn-success btn-sm myTooltip">
                                             <i class="uil uil-trash-alt"></i>
-                                            <span class="tooltiptext tooltip-left">Wyczyść listę</span>
+                                            <span class="tooltiptext tooltip-left">{{$t('header.clearList')}}</span>
                                         </button>
                                     </td>
 								</tr>
@@ -165,6 +169,7 @@ import PieChart from "../PieChart.js";
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 import lodash from 'lodash';
+import { i18n } from './../../src/main'
 
 export default {
     props: {
@@ -175,6 +180,7 @@ export default {
     components: {
         Multiselect,
 		PieChart,
+        
     },
     data(){
         return {
@@ -215,6 +221,7 @@ export default {
     created(){
         this.getLocalStorage();
         this.returnChartData();
+        console.log(this.fat);
     },
     methods: {
         show(){
@@ -320,11 +327,14 @@ export default {
         setLocalStorage(item){
             localStorage.setItem('lista', JSON.stringify(item));
         },
+        lang(f){
+            return i18n.tc(f);
+        },
         
         //CHART JS
 		returnChartData(){
             this.chartData = {
-                labels: [ 'Tłuszcz', 'Błonnik', 'Białko', 'Węglowodany'],
+                labels: [ "Tłuszcz", 'Błonnik', 'Białko', 'Węglowodany'],
                 datasets: [
                     {
                     backgroundColor: [ '#000', '#8ebd0e', '#DD1B16', 'yellow'],

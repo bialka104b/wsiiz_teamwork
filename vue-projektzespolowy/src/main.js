@@ -33,7 +33,7 @@ const router = vueRouter.createRouter({
 	],
 });
 
-const i18n = createI18n({
+export const i18n = createI18n({
 	// something vue-i18n options here ...
 	locale: "pl", // set locale
 	fallbackLocale: "en", // set fallback locale
