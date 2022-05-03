@@ -1,11 +1,11 @@
 .headerContainer {
     .header {
         background-image: url(
-            "../assets/images/background.jpg"
+            "/src/assets/images/background.jpg"
         );
         background-size: cover;
         background-attachment: ceil($number: 5);
-        height: 100vh;
+        height: 80vh;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -24,21 +24,19 @@
                     border-radius: 20px;
                     padding: 5px 10px;
                     text-decoration: none;
-                    color: $primary;
                     transition: all 0.5s ease-out;
+                    color: white;
 
                     &:hover{
-                        color: white;
-                        background-color: $primary;
+                        background-color: transparent;
+                        color: $primary;
+                        border: 1px solid $primary;
                     }
                 }
             }
             nav {
-                height: 60px;
-            }
-
-            .logoContainer {
-
+                height: 100px;
+                padding: 10px;
             }
         }
         .titlePage {
@@ -47,7 +45,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: start;
+            align-items: center;
             margin-bottom: 32px;
             margin-top: 6%;
             
@@ -64,11 +62,9 @@
                 font-weight: 700;
             }
 
-            button.calc {
-                background: $primary;
+            .calc {
                 border: 2px solid #8ebd0e88;
                 border-radius: 20px;
-                width: 100px;
                 transition: all 0.5s ease-out;
                 &:hover {
                     background-color: rgba(255, 255, 255, 0);
