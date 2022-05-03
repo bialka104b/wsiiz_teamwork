@@ -19,7 +19,7 @@
 			</div>
 			<div>
 				<p class="textJustify">{{opis}}</p>
-				<span>Podane wartości są podane dla 100 g produktu</span>
+				<span class="font-small">*Podane wartości są podane dla 100 g produktu</span>
 				<p class="mb-0">{{$t("header.calories")}}: {{kalorie}}</p>
 				<p class="mb-0">{{$t("header.protein")}}: {{bialko}}g</p>
 				<p class="mb-0">{{$t("header.fiber")}}: {{blonnik}}g</p>
