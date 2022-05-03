@@ -105,7 +105,7 @@
                                     </td>
 								</tr>
 								<tr>
-									<td scope="row" class="borderRadiusLB">suma</td>
+									<td scope="row" class="borderRadiusLB">{{$t("header.sum")}}</td>
 									<td></td>
 									<td>{{sumCalories}}</td>
 									<td>{{sumFat}}g</td>

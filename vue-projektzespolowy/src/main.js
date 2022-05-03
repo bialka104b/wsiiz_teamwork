@@ -11,6 +11,9 @@ import * as vueRouter from "vue-router";
 import { createRouter, createWebHistory } from "vue-router";
 import WelcomeItem from "./components/WelcomeItem.vue";
 import { createI18n } from "vue-i18n";
+// import BootstrapVue3 from "bootstrap-vue-3";
+// import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap-vue-3/dist/bootstrap-vue-3.css";
 
 const router = vueRouter.createRouter({
 	history: vueRouter.createWebHistory(),

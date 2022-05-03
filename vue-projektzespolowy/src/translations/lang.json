@@ -20,7 +20,11 @@
 			"addOther": "Add other",
 			"removeItem": "Remove product",
 			"addToList": "Add to list",
-			"clearList": "Clear list"
+			"clearList": "Clear list",
+			"sum": "sum",
+			"descriptionInfo": "Here you will find detailed descriptions of all products",
+			"description": "Description",
+			"close": "Close"
 		},
 		"Ananas": "Pineapple",
 		"Arbuz": "Watermelon",
@@ -156,7 +160,11 @@
 			"addOther": "Dodaj inny",
 			"removeItem": "Usuń z listy",
 			"addToList": "Dodaj do listy",
-			"clearList": "Wyczyść listę"
+			"clearList": "Wyczyść listę",
+			"sum": "suma",
+			"descriptionInfo": "Tu znajdziesz szczegółowe opisy wszystkich produktów",
+			"description": "Opis",
+			"close":"Zamknij"
 		},
 		"Ananas": "Ananas",
 		"Arbuz": "Arbuz",
