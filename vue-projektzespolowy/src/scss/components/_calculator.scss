@@ -1,0 +1,43 @@
+.div-multiselect {
+    margin-top: auto;
+
+    button {
+        height: 40px;
+        font-size: 12px;
+    }
+}
+
+.weightProduct {
+    height: 40px;
+    border-radius: 5px;
+    border:2px solid $primary;
+    color: $primary;
+    &:focus, &:active {
+        border:2px solid $primary!important;
+        color: $primary;
+        outline-color: $primary;
+    }
+
+}
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.borderRadiusRB {
+    border-bottom-right-radius: 20px;
+}
+.borderRadiusRT {
+    border-top-right-radius: 20px;
+}
+.borderRadiusLT {
+    border-top-left-radius: 20px;
+}
+.borderRadiusLB {
+    border-bottom-left-radius: 20px;
+}
+.alignCenter {
+    text-align: center;
+}
+
+.table-dark {
+    border-color: white!important;
+}

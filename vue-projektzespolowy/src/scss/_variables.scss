@@ -1,1 +1,9 @@
-$primary: #8ebd0e;
+$primary: #8ebd0e !default;
+// $secondary: $gray-600 !default;
+$success: yellow !default;
+// $info: $cyan !default;
+// $warning: $yellow !default;
+// $danger: $red !default;
+// $light: $gray-100 !default;
+// $dark: $gray-900 !default;
+@import "node_modules/bootstrap/scss/bootstrap";
