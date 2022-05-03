@@ -15,7 +15,7 @@
                     <div class="navLink">
                         <router-link to="/about" class="d-block fw-bold btn-primary">About</router-link>
                     </div>
-                    <div class="locale-changer">
+                    <div class="navLink locale-changer">
                         <select v-model="$i18n.locale">
                         <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
                         </select>
@@ -38,6 +38,6 @@ export default {
         showBgImage: {
             type: Boolean
         }
-    },
+    }
 }
 </script>

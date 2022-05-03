@@ -2,9 +2,7 @@
   <div class="modal-backdrop">
     <div class="modal" v-show="value">
       <header class="modal-header text-primary">
-        <slot name="header">
-          {{$t(nazwa)}} 
-        </slot>
+		<div v-if="nazwa != ''">{{$t(nazwa)}} </div>
         <button
           type="button"
           class="btn-close"
@@ -31,7 +29,6 @@
 				<p class="mb-0">KJ: {{kj}}</p>
 				<div class="row">
 					<div class="col-6" v-if="product != null">
-						<!-- {{returnChartData(product)}} -->
 						<PieChart v-if="chartData !={}"
 							:width="500"
 							:height="200"
@@ -68,11 +65,9 @@
 
 <script>
 import axios from 'axios';
-import { Bar } from 'vue-chartjs';
 import PieChart from "../PieChart";
 import BarChart from "../BarChart";
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
-// ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
   export default {
     name: 'Modal',
@@ -129,8 +124,6 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
 
         }
     },
-	created(){
-	},
 	updated() {
 		this.createProduct(this.product);
 		this.returnChartData(this.product);
@@ -157,7 +150,6 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
 				this.kategoria=this.product.kategoria
 				this.opis = this.product.opis
 			}
-			
 		},
 	  	//CHART JS
 		returnChartData(){
@@ -289,4 +281,6 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
     border: 1px solid #4AAE9B;
     border-radius: 2px;
   }
+  
+  
 </style>

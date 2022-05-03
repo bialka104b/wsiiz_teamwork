@@ -24,7 +24,10 @@
 			"sum": "sum",
 			"descriptionInfo": "Here you will find detailed descriptions of all products",
 			"description": "Description",
-			"close": "Close"
+			"close": "Close",
+			"more":"More",
+			"about":"About",
+			"projectCreators": "Project creators"
 		},
 		"Ananas": "Pineapple",
 		"Arbuz": "Watermelon",
@@ -164,7 +167,10 @@
 			"sum": "suma",
 			"descriptionInfo": "Tu znajdziesz szczegółowe opisy wszystkich produktów",
 			"description": "Opis",
-			"close":"Zamknij"
+			"close":"Zamknij",
+			"more": "Więcej",
+			"about": "O Nas",
+			"projectCreators": "Twórcy projektu"
 		},
 		"Ananas": "Ananas",
 		"Arbuz": "Arbuz",

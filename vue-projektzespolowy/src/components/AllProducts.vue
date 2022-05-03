@@ -14,7 +14,7 @@
                 />
             <div class="col-3 position-relative mt-3" v-for="(product, index) in result" :key="product.id">
                 <div class="shadow-lg">
-                    <p class="bg-primary text-white p-2 text-center mb-0">{{$t(product.nazwa)}}
+                    <p class="bg-primary text-white p-2 text-center mb-0">{{$t(`${product.nazwa}`)}}
                     </p>
                     <hr class="mt-1 bg-primary hr">
 

@@ -31,7 +31,7 @@ const router = vueRouter.createRouter({
 		{
 			path: "/about",
 			name: "About",
-			component: () => import("./components/Calculator.vue"),
+			component: () => import("./views/About.vue"),
 		},
 	],
 });
