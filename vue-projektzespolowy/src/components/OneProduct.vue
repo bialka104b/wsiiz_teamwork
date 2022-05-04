@@ -60,12 +60,6 @@ export default {
             }
         }
     },
-    created() {
-        
-    },
-    computed: {
-        
-    },
     methods: {
         async getOneProduct() {
             const config = {

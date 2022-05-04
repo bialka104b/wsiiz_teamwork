@@ -46,7 +46,7 @@
             </div>
             <div class="container titlePage">
                 <h3>{{$t("header.calculateCalories")}}</h3>
-                <h1>FIT CALCULATOR</h1>
+                <h1 class="text-center">FIT CALCULATOR</h1>
                 <p>{{$t("header.carboCalProtIg")}}</p>
                 <router-link to="/calculator" class="btn btn-primary calc text-white mt-4 hoverButton">{{$t("header.calculator")}}</router-link>
             </div>
