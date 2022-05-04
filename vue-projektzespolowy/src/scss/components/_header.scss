@@ -73,4 +73,17 @@
             }
         }
     }
+    .locale-changer {
+        select,
+        select:focus
+         {
+
+            border: 2px solid #8ebd0e;
+            height: 100%;
+            color:#8ebd0e;
+            text-align: center;
+            border-radius: 5px;
+            outline-color: #8ebd0e;
+        }
+    }
 }

@@ -13,7 +13,7 @@
                         <router-link to="/allProducts" class="d-block fw-bold btn-primary">{{$t("header.allProducts")}}</router-link>
                     </div>
                     <div class="navLink">
-                        <router-link to="/about" class="d-block fw-bold btn-primary">About</router-link>
+                        <router-link to="/about" class="d-block fw-bold btn-primary">{{$t("header.about")}}</router-link>
                     </div>
                     <div class="navLink locale-changer">
                         <select v-model="$i18n.locale">

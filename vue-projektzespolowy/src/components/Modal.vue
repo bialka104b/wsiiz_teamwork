@@ -19,7 +19,7 @@
 			</div>
 			<div>
 				<p class="textJustify">{{opis}}</p>
-				<span class="font-small">*Podane wartości są podane dla 100 g produktu</span>
+				<span class="font-small">*{{$t('header.valuesGiven')}}</span>
 				<p class="mb-0">{{$t("header.calories")}}: {{kalorie}}</p>
 				<p class="mb-0">{{$t("header.protein")}}: {{bialko}}g</p>
 				<p class="mb-0">{{$t("header.fiber")}}: {{blonnik}}g</p>
@@ -121,7 +121,6 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
                     },
                 },
 			}
-
         }
     },
 	updated() {
@@ -182,105 +181,12 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
 				}]
 			}
 		}
-		// async getProducts() {
-		// 	await console.log(this.product, "this")
-        //     const config = {
-        //       method: 'get',
-        //       url: `http://localhost:4000/api/product/${this.product.id}`,
-        //       headers: { 
-        //         'Content-Type': 'application/json',
-        //       }
-        //     };
-        //     await axios(config)
-        //         .then(res => {
-        //             if (res.status == 200) {
-        //                 this.result = res.data.products[0];
-		// 				console.log(res.data.products,"dd")
-		// 				console.log(this.result,"result")
-        //                 // this.count = res.data.count;
-        //                 // this.products = res.data.products;
-        //             } else {}
-        //         })
-        //         .catch(err => {
-        //             console.log(err);
-        //         })
-        // },
     },
   };
 </script>
 
 <style>
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: block;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100%;
-  }
-
-  .modal {
-    background: #FFFFFF;
-    box-shadow: 2px 2px 20px 1px;
-    overflow-x: auto;
-    display: flex;
-    flex-direction: column;
-    max-width: 500px;
-    height: 80vh;
-    top: 10vh;
-    left: calc((100% - 500px)/2);
-    padding: 15px;
-  }
-
-  .modal-header,
-  .modal-footer {
-    /* padding: 15px; */
-    
-    display: flex;
-  }
-
-  .modal-header {
-    position: relative;
-    border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
-    justify-content: space-between;
-  }
-
-  .modal-footer {
-    border-top: 1px solid #eeeeee;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .modal-body {
-    position: relative;
-    /* padding: 20px 10px; */
-  }
-
-  .btn-close {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    border: none;
-    font-size: 26px;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
-  }
-
-  .btn-green {
-    color: white;
-    background: #4AAE9B;
-    border: 1px solid #4AAE9B;
-    border-radius: 2px;
-  }
+  
   
   
 </style>
