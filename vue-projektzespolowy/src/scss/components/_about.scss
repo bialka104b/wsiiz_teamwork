@@ -1,12 +1,20 @@
 .aboutRow {
-    height: 250px;
+    @media only screen and (max-width: 767px) {
+        margin-top: 0;
+        div:not(.heightImg) {
+            text-align: center;
+        }
+        .heightImg {
+            padding: 0 88px;
+        }
+    }
 }
 
 .foto {
     box-shadow: 0px 0px 15px 0px rgba(66, 68, 90, 1);
     border: 6px solid black;
-    display: inline-block;
-    width: 200px;
-    height: 100%;
+    display: block;
+    width: 100%;
     object-fit: cover;
+    max-width: 100%;
 }
