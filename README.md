@@ -6,6 +6,9 @@
   <!-- <a href="https://projekt_zespolowy.netlify.app">Demo</a> -->
 </div>
 Marta https://wakatime.com/@bialka/projects/kqdqbyybeg?start=2022-04-28&end=2022-05-04
+
+[![wakatime](https://wakatime.com/badge/user/ff698a74-c07c-48e3-9090-6ca031e67730/project/ca5ab9f2-c10a-4e6d-b84d-4a7a36c3a1cd.svg)](https://wakatime.com/badge/user/ff698a74-c07c-48e3-9090-6ca031e67730/project/ca5ab9f2-c10a-4e6d-b84d-4a7a36c3a1cd)
+
 <h1 align="center">PROJEKT_ZESPOLOWY</h1>
 
 <p align="center">
