@@ -11,7 +11,7 @@
   	<div class="footerContainer backgroundPrimary">
     	<footer class="container py-5">
 			<div class="copyright-text">
-				<p>Copyright &amp; <strong>FIT Calculator </strong>{{$t("header.rightReserved")}}</p>
+				<p><i class="uil uil-copyright"></i> &amp; <strong>FIT Calculator </strong>{{$t("header.rightReserved")}}</p>
 			</div>
 			<div class="footer-social-section d-flex justify-content-between align-items-center">
               	<h4 class="social-title mb-0">{{$t("header.followUs")}}:</h4>

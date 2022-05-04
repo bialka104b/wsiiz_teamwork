@@ -6,6 +6,7 @@
 @import "./components/products";
 @import "./components/footer";
 @import "./components/modal";
+@import "./components/about";
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap');
 
@@ -54,4 +55,12 @@ body {
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent transparent yellow;
+}
+
+.textJustify {
+    text-align: justify;
+}
+
+body::-webkit-scrollbar {
+    width:0;
 }

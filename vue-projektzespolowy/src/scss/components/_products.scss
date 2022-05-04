@@ -10,4 +10,50 @@
     hr {
         margin-bottom: 0;
     }
+    .containerSearch {
+        .search {
+            width: 100%;
+            border: 2px solid $primary;
+            color: $primary;
+            outline-color: $primary;
+            border-radius: 5px;
+            text-align: center;
+        }
+    }
+    .marginSm {
+        .rightSm {
+            right:15px;
+        }
+        @media only screen and (max-width: 576px) {
+            margin: 0;
+            div.col-12 {
+                padding: 0 30px;
+                .rightSm{
+                    right: 30px;
+                }
+            }
+        }
+    }
+}
+
+.scroolTop {
+    background-color: $primary;
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    z-index: 500;
+    bottom: 15px;
+    right: 15px;
+    padding: 9px 9px 9px;
+    border-radius: 5px;
+    a {
+        display: block;
+    }
+    i {
+        font-size: 25px;
+        color: white;
+        &::before {
+            display: block;
+        }
+    }
 }

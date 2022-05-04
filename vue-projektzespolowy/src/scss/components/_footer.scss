@@ -2,6 +2,20 @@
     background-image: url("/src/assets/images/bgFooter.jpg"
         );
     background-size: contain;
+    @media only screen and (max-width: 576px) {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: inherit;
+        footer {
+            padding: 20px 40px !important;
+            .nav-link {
+                padding: 10px;
+            }
+            .social-link {
+                font-size: 25px;
+            }
+        }
+    }
 }
 
 .social-link {

@@ -1,18 +1,18 @@
 <template>
-    <section class="productsSection">
-        <div class="row">
+    <section class="productsSection" >
+        <div class="row marginSm">
             <h1 class="text-center">{{$t("header.allProducts")}}</h1>
             <h5 class="text-center">{{$t("header.descriptionInfo")}}</h5>
-                
-
-                <Modal
-                    v-show="isModalVisible"
-                    @close="closeModal"
-                    :product="productinModal"
-                    :value="isModalVisible"
-                    
-                />
-            <div class="col-3 position-relative mt-3" v-for="(product, index) in result" :key="product.id">
+            <Modal
+                v-show="isModalVisible"
+                @close="closeModal"
+                :product="productinModal"
+                :value="isModalVisible"
+            />
+            <div class="col-12 containerSearch">
+                <input type="text" v-model="search" :placeholder="$t('header.search')" class="search"/>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 position-relative mt-3" v-for="(product, index) in filteredList()" :key="product.id">
                 <div class="shadow-lg">
                     <p class="bg-primary text-white p-2 text-center mb-0">{{$t(`${product.nazwa}`)}}
                     </p>
@@ -27,8 +27,7 @@
                     </button>
                     <button
                     type="button"
-                    class="btn bg-primary text-white position-absolute btnShow"
-                    style="right:15px"
+                    class="btn bg-primary text-white position-absolute btnShow rightSm"
                     @click="showModal(product)"
                     >{{$t('header.more')}}</button>
                     <div v-show="isOpen[index] == true" class="px-4 py-2">
@@ -39,17 +38,15 @@
                         <p class="mb-0">{{$t("header.carbohydrates")}}: {{product.weglowodany}}</p>
                         <p class="mb-0">Ig: {{product.ig}}</p>
                         <p class="mb-0">KJ: {{product.kj}}</p>
-                        <!-- opis
-                        kalorie
-                        bialko
-                        blonnik
-                        tluszcz
-                        kj -->
                     </div>
                 </div>
             </div>
         </div>
-        
+        <div class="scroolTop">
+            <a href="#mainContainer">
+                <i class="uil uil-top-arrow-to-top"></i>
+            </a>
+            </div>
     </section>
 </template>
 
@@ -69,12 +66,16 @@ export default {
             isModalVisible: false,
             isOpen: [],
             productinModal: null,
+            search:'',
         }
     },
     created() {
         for (let index = 0; index < this.result.length; index++) {
             this.isOpen.push(false);
         }
+    },
+    computed: {
+        
     },
     methods: {
         isOpenM(index){
@@ -83,12 +84,17 @@ export default {
         },
         showModal(product) {
             this.productinModal = product;
-            // this.productinModal = product.id;
             this.isModalVisible = true;
         },
         closeModal() {
             this.isModalVisible = false;
-        }
+        },
+        
+        filteredList(){
+			return this.result.filter(post => {
+				return post.nazwa.toLowerCase().includes(this.search.toLowerCase());
+			})
+		},
     },
 }
 </script>

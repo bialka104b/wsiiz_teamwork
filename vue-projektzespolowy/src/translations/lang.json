@@ -30,7 +30,8 @@
 			"projectCreators": "Project creators",
 			"followUs": "Follow Us On Social",
 			"rightReserved": "All Rights Reserved",
-			"valuesGiven":"The values given are for 100 g of product"
+			"valuesGiven":"The values given are for 100 g of product",
+			"search": "Search product"
 		},
 		"Ananas": "Pineapple",
 		"Arbuz": "Watermelon",
@@ -176,7 +177,8 @@
 			"projectCreators": "Twórcy projektu",
 			"followUs": "Śledź nas w Social Media",
 			"rightReserved": "Wszelkie prawa zastrzeżone",
-			"valuesGiven": "Podane wartości są podane dla 100 g produktu"
+			"valuesGiven": "Podane wartości są podane dla 100 g produktu",
+			"search": "Wyszukaj produkt"
 		},
 		"Ananas": "Ananas",
 		"Arbuz": "Arbuz",

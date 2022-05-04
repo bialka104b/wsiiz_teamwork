@@ -37,17 +37,3 @@
 <script>
 export default {}
 </script>
-
-<style scoped>
-.aboutRow {
-    height: 250px;
-}
-.foto {
-    box-shadow: 0px 0px 15px 0px rgba(66, 68, 90, 1);
-    border: 6px solid black;
-    display: inline-block;
-    width: 200px;
-    height: 100%;
-    object-fit: cover;
-}
-</style>
