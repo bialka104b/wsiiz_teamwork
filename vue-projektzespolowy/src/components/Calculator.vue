@@ -32,7 +32,7 @@
                         class="d-block w-100 weightProduct">
 					</label>
 				</div>
-				<div class="div-multiselect col-12 col-sm-6 col-md-4">
+				<div class="div-multiselect col-12 col-md-4">
 					<button type="button" @click="add()" class="btn btn-primary p-1 w-100">{{$t('header.add')}}</button>
 				</div>
 			</div>
@@ -221,7 +221,6 @@ export default {
     created(){
         this.getLocalStorage();
         this.returnChartData();
-        console.log(this.fat);
     },
     methods: {
         show(){

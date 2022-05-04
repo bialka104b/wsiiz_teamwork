@@ -1,4 +1,13 @@
 .headerContainer {
+    .logoContainer {
+        padding: 10px;
+        height: 100px;
+    }
+    .logoImage {
+        display: block;
+        max-width: 100%;
+        max-height: calc(100%);
+    }
     .header {
         background-image: url(
             "/src/assets/images/background.jpg"
@@ -12,10 +21,14 @@
         justify-content:start;
         
         .headerRow {
+            position: fixed;
             height: 100px;
             margin: 0;
             padding: 0 10%;
             align-items: center;
+            width: 100%;
+            box-shadow: 2px 2px 20px 1px;
+            z-index: 200;
 
             .navLink {
                 padding: 20px 0;
@@ -38,6 +51,26 @@
                 height: 100px;
                 padding: 10px;
             }
+            @media only screen and (max-width: 800px) {
+                font-size: 15px;
+                padding: 0 2%;
+                height: 80px;
+                select {
+                    height: 32px;
+                }
+                .logoImage{
+                    // max-height: 80%
+                }
+                .logoContainer {
+                    padding: 0;
+                }
+                .logoContainer, nav {
+                    height: calc(100% - 20px)
+                }
+                .navLink {
+                    padding: 5px 0;
+                }
+            }
         }
         .titlePage {
             height: 600px;
@@ -52,6 +85,9 @@
             h1 {
                 font-weight: 500;
                 font-size: 80px;
+                @media only screen and (max-width: 576px) {
+                    font-size: 50px;
+                }
             }
             
             h3{
@@ -72,5 +108,65 @@
                 }
             }
         }
+        .listDropdown {
+            box-shadow: 2px 3px 5px 0px;
+            background-color: $white;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 0;
+            max-width: 200px;
+            position: absolute;
+            top: 80px;
+            right: 10px;
+            .navLink {
+                padding: 0;
+                a {
+                    border-radius: 0;
+                    &:hover {
+                        border: 0;
+                    }
+                }
+            }
+        }
+        .dropButton {
+            align-items: center;
+            display: none;
+            @media only screen and (max-width: 576px) {
+                display: block;
+                height: 32px;
+                padding: 5px;
+                i::before {
+                    display: block;
+                }
+            }
+            &:focus {
+                box-shadow: 0 0 0 0 rgb(121 161 12 );
+            }
+        }
+        .displaySm {
+            @media only screen and (max-width: 576px) {
+                display: none;
+            }
+        }
+    }
+    .locale-changer {
+        select,
+        select:focus
+         {
+            border: 2px solid #8ebd0e;
+            height: 40px;
+            color:#8ebd0e;
+            text-align: center;
+            border-radius: 5px;
+            outline-color: #8ebd0e;
+        }
+    }
+
+    
+}
+
+.hoverButton {
+    &:hover {
+        color: $primary!important;
     }
 }
